@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %} DesafioFlask {% endblock %}</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/navbar-fixed/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',
+                                            filename='css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static',
+                                            filename='css/base.css') }}">
+<style>
+	    #tab{
+	        width:100%;
+	        border:solid 1px;
+	        text-align: left;
+	        border-collapse:collapse;
+	        border-color:#C1CDCD;
+	    }
+	    #tab tr{
+	        height:30px;
+	    }
+	    #tab thead tr{
+	        background: #A2B5CD;
+	    }
+	    #tab tr td:first-child, #tab tr td:last-child{
+	        width:150px;
+	    }
+	    #tab tbody tr:nth-child(odd){
+	        background: #C1CDCD
+	    }
+	    .filtroColuna{
+	        width:100%;
+	        border:solid 1px;
+	    }
+</style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Desafio Flask!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only"></span></a>
+      </li>
+    {% if current_user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('cadastroitens') }}">Cadastro de Livros</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('visualizaritens') }}">Visualizar Livros</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('removeritens') }}">Remover Livros</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('alteraritens') }}">Alterar Livros</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('cadastrousuario') }}">Cadastro de Usuário</a>
+  </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('login') }}">Fazer Login</a>
+    </li>
+      
+      {% endif %}
+      <!--li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul-->
+    
+  </div>
+</nav>
+</br></br></br></br>
+  
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-warning">
+          <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+          {% endif %}
+        {% endwith %}
+  
+{% block content %}
+
+{% endblock %}
+
+
+
+
+<script src="{{ url_for('static', 
+                        filename='js/bootstrap.min.js') }}" ></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+</body>
+</html>

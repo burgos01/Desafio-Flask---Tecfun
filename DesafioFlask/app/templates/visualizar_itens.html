@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+<title>{% block title %}{{ super() }}- Visualização de Livros {% endblock %}</title>
+
+{% block content %}
+
+<div class="container">
+    <h2>Visualização de Livros Cadastrados</h2>
+    <p>Visualize e Pesquise seus livros cadastrados </p>
+    <p>Realize a busca com letras minusculas</p>                                                                                  
+    <div class="input-group">
+    <div>Buscar por nome: <input class="form-control" type="text" id="filtro-nome" placeholder="Buscar por nome"/></div>
+    </div>
+    </br>
+    <div class="input-group">
+    <div>Buscar por categoria: <input class="form-control" type="text" id="filtro-cagetoria" placeholder="Buscar por categoria"/></div>
+    </div>
+    </br></br>
+    <div class="table-responsive">          
+    <table class="table" id="lista">
+      <thead>
+        <tr>
+           <!--Tive um pequeno problema com o JS, utilizei o algoritimo de ordenação dessa forma-->
+          <th>Nome</th>
+          <th>Autor</th>
+          <th>Categoria</th>
+          <th>Idioma</th>
+          <th>#</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in value %}
+        <tr>
+          
+          <td>{{ row.nome }}</td>
+          <td>{{ row.autor }}</td>
+          <td categoria="{{ row.categoria }}">{{ row.categoria }}</td>
+          <td>{{ row.idioma }}</td>
+          <td>{{ row.id }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+
+<script>
+  window.onload=function(){
+//para nomes
+var filtro_nome = document.getElementById('filtro-nome');
+var tabela = document.getElementById('lista');
+var filtro_categ = document.getElementById('filtro-cagetoria')
+filtro_nome.onkeyup = function() {
+    var nomeFiltro = filtro_nome.value;
+    for (var i = 1; i < tabela.rows.length; i++) {
+        var conteudoCelula = tabela.rows[i].cells[0].innerText;
+        var corresponde = conteudoCelula.indexOf(nomeFiltro) >= 0;
+        tabela.rows[i].style.display = corresponde ? '' : 'none';
+    }
+};
+
+filtro_categ.onkeyup = function(){
+    var nomeFiltro = filtro_categ.value;
+    for (var i = 1; i<tabela.rows.length; i++){
+      var conteudoCelula = tabela.rows[i].cells[2].innerText;
+      var corresponde = conteudoCelula.indexOf(nomeFiltro) >= 0;
+      tabela.rows[i].style.display = corresponde ? '' : 'none';
+    }
+};
+
+}
+
+
+</script>
+
+
+
+{% endblock %}

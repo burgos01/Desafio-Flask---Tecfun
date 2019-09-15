@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+<title>{% block title %}{{ super() }}- Remover Livros {% endblock %}</title>
+
+{% block content %}
+<div class="container">
+        <h2>Remova Seus Livros Cadastrados</h2>
+        <p>Visualize e Pesquise seus livros cadastrados </p>                                                                                      
+        
+        </br>
+        <div class="table-responsive">          
+        <table class="table" id="lista">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Autor</th>
+              <th>Categoria</th>
+              <th>Idioma</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in value %}
+            <tr>
+              <td>{{ row.id }}</td>
+              <td>{{ row.nome }}</td>
+              <td>{{ row.autor }}</td>
+              <td>{{ row.categoria }}</td>
+              <td>{{ row.idioma }}</td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </br>
+        <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Remover Livros</a>
+                    </h4>
+                  </div>
+                  <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                    <form action="" method="POST">
+                            {{ form.csrf_token }}
+                    <div class="col-md-4 col-offset-4">
+                    <div class="form-group">
+                    <label>ID do item a ser removido: </label>
+                    {{ form.id(class="form-control", 
+                    placeholder="Id do Item") }}
+                    </br>
+                    <button type="submit" class="btn btn-primary">Remover</button>
+                    
+                    </form>
+                    
+                    </div>
+                    </div>
+                    
+                
+                  </div>
+                </div>
+                
+                </div>
+                  </div>
+                </div>
+              </div> 
+            </div>
+
+
+
+        
+      </div>
+
+{% endblock %}
